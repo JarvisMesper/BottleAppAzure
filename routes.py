@@ -39,6 +39,8 @@ def messenger_webhook():
     """
     A webhook to return a challenge
     """
+    return "challenge"
+    
     verify_token = request.query.get('hub.verify_token')
     # check whether the verify tokens match
     if verify_token == FB_VERIFY_TOKEN:
