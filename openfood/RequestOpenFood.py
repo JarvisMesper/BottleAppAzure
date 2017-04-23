@@ -1,8 +1,7 @@
 import requests 
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
-import io
+import os
+import sys
+
 
 class QuerryError(Exception):
         
@@ -18,7 +17,7 @@ class QuerryError(Exception):
 class RequestOpenFood:
 
     BASE_URL='https://www.openfood.ch/api/v2'
-    API_KEY='4c230279d7ab2cf2e1692497f44edc49'
+    OPENFOOD_API_KEY=os.environ.get('OPENFOOD_API_KEY')
     URL_SEARCH = BASE_URL + '/products/_search'
     URL_NUTRIENT = BASE_URL + '/nutrients'
     QUERY_SUCCEED = 200
@@ -27,7 +26,7 @@ class RequestOpenFood:
     text_margin = 0.35
     
     HEADERS = {
-        'Authorization': "Token token={}".format(API_KEY),
+        'Authorization': "Token token={}".format(OPENFOOD_API_KEY),
         'Accept': 'application/vnd.api+json',
         'Content-Type': 'application/vnd.api+json'
     }
