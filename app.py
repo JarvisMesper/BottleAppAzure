@@ -21,6 +21,8 @@ terminal_mode = False
 WIT_TOKEN = "G5POZYLX6DTN3C2253C6PXYXHJZLEASF"
 print(WIT_TOKEN)
 
+app = Bottle()
+
 if not terminal_mode:
     # Messenger API parameters
     FB_PAGE_TOKEN = "EAAJI6cAy9F4BALOTnrcZBPBehXiHdo76UuHzgLRFyKkURuh4RmRpVNZARPSiACZBzsVqCZBAnylTTHaZBZBtvSf52iFwmjXYZCpZA2ivMhAydwd8JFRUGffg0hZApyS1TIMGS6WfhJrh9NeJUZAFQkZBR2pM1z3dEv9Dkp6x7OD6fIIZAwZDZD"
@@ -29,7 +31,6 @@ if not terminal_mode:
 
     # Setup Bottle Server
     debug(True)
-    app = Bottle()
 
     # Facebook Messenger GET Webhook
     @app.get('/webhook')
@@ -39,7 +40,7 @@ if not terminal_mode:
         """
         verify_token = request.query.get('hub.verify_token')
         print(verify_token)
-        
+
         # check whether the verify tokens match
         if verify_token == FB_VERIFY_TOKEN:
             # respond with the challenge to confirm
@@ -80,7 +81,7 @@ if not terminal_mode:
 if '--debug' in sys.argv[1:] or 'SERVER_DEBUG' in os.environ:
     # Debug mode will enable more verbose output in the console window.
     # It must be set at the beginning of the script.
-    bottle.debug(True)
+    app.debug(True)
 
 @route('/')
 def index():
@@ -90,7 +91,7 @@ def index():
 def wsgi_app():
     """Returns the application to make available through wfastcgi. This is used
     when the site is published to Microsoft Azure."""
-    return bottle.default_app()
+    return app.default_app()
 
 def fb_message(sender_id, text):
     """
@@ -150,4 +151,4 @@ if __name__ == '__main__':
             PORT = 5555
 
         # Starts a local test server.
-        bottle.run(server='wsgiref', host=HOST, port=PORT)
+        app.run(server='wsgiref', host=HOST, port=PORT)
