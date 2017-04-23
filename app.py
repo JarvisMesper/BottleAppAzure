@@ -15,7 +15,7 @@ from actions import openfood
 import requests
 from wit import Wit
 
-terminal_mode = False
+terminal_mode = True
 
 app = Bottle()
 
@@ -124,7 +124,8 @@ def send(request, response):
 actions = {
     'send': send,
     'getForecast': forecast.get_forecast,
-    #'getOpenFoodInfo': openfood.getOpenFoodInfo,
+    'getOpenFoodInfo': openfood.getOpenFoodInfo,
+    'getProductInfo': openfood.getOpenFoodInfo,
 }
 
 client = Wit(access_token=WIT_TOKEN, actions=actions)
