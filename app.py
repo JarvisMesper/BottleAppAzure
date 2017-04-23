@@ -79,7 +79,7 @@ if not terminal_mode:
 
 
 
-@route('/')
+@app.route('/')
 def index():
     """Renders the home page."""
     return "Hello World"
