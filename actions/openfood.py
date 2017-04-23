@@ -1,6 +1,6 @@
 from actions import wit
-from openfood.RequestOpenFood import RequestOpenFood
-from openfood.RequestOpenFood import ProductBuilder
+#from openfood.RequestOpenFood import RequestOpenFood
+#from openfood.RequestOpenFood import ProductBuilder
 
 def getOpenFoodInfo(request):
     print('--- get_openfood() called ---')
@@ -14,7 +14,8 @@ def getOpenFoodInfo(request):
 
 
     product = wit.first_entity_value(entities, 'product_id')
-    if product:
+    return context
+"""    if product:
 
         try:
             res = RequestOpenFood.get_product(barcode=product)
@@ -28,6 +29,4 @@ def getOpenFoodInfo(request):
         context['missing_id'] = True
         if context.get('info') is not None:
             del context['info']
-
-
-    return context
+"""
