@@ -78,10 +78,6 @@ if not terminal_mode:
         return None
 
 
-if '--debug' in sys.argv[1:] or 'SERVER_DEBUG' in os.environ:
-    # Debug mode will enable more verbose output in the console window.
-    # It must be set at the beginning of the script.
-    app.debug(True)
 
 @route('/')
 def index():
@@ -91,7 +87,7 @@ def index():
 def wsgi_app():
     """Returns the application to make available through wfastcgi. This is used
     when the site is published to Microsoft Azure."""
-    return app.default_app()
+    return app
 
 def fb_message(sender_id, text):
     """
