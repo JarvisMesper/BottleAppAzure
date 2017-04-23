@@ -33,3 +33,17 @@ def about():
         message='Your application description page.',
         year=datetime.now().year
     )
+
+@route('/webhook')
+def messenger_webhook():
+    """
+    A webhook to return a challenge
+    """
+    verify_token = request.query.get('hub.verify_token')
+    # check whether the verify tokens match
+    if verify_token == FB_VERIFY_TOKEN:
+        # respond with the challenge to confirm
+        challenge = request.query.get('hub.challenge')
+        return challenge
+    else:
+        return 'Invalid Request or Verification Token'
