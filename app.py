@@ -17,9 +17,11 @@ from wit import Wit
 
 terminal_mode = False
 
+
+test = os.environ.get('test')
 # Wit.ai parameters
 WIT_TOKEN = "G5POZYLX6DTN3C2253C6PXYXHJZLEASF"
-print(WIT_TOKEN)
+print(test)
 
 app = Bottle()
 
@@ -83,6 +85,11 @@ if not terminal_mode:
 def index():
     """Renders the home page."""
     return "Hello World"
+
+@app.route('/test')
+def index():
+    """Renders the home page."""
+    return test
 
 def wsgi_app():
     """Returns the application to make available through wfastcgi. This is used
