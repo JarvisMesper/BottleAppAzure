@@ -1,6 +1,6 @@
 from actions import wit
 from actions.RequestOpenFood import RequestOpenFood
-#from openfood.RequestOpenFood import ProductBuilder
+from openfood.RequestOpenFood import ProductBuilder
 
 def getOpenFoodInfo(request):
     print('--- get_openfood() called ---')
@@ -12,8 +12,8 @@ def getOpenFoodInfo(request):
 
         try:
             res = RequestOpenFood.get_product(barcode=product)
-            #res = ProductBuilder.clean_data(res)
-            context['info'] = "I have found result about this product but can't write it here."
+            res = ProductBuilder.clean_data(res)
+            context['info'] = res
             if context.get('missing_id') is not None:
                 del context['missing_id']
         except:
