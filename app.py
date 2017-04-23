@@ -17,19 +17,15 @@ from wit import Wit
 
 terminal_mode = False
 
-
-test = os.environ.get('test')
-# Wit.ai parameters
-WIT_TOKEN = "G5POZYLX6DTN3C2253C6PXYXHJZLEASF"
-print(test)
-
 app = Bottle()
+
+WIT_TOKEN = os.environ.get('WIT_TOKEN')
 
 if not terminal_mode:
     # Messenger API parameters
-    FB_PAGE_TOKEN = "EAAJI6cAy9F4BALOTnrcZBPBehXiHdo76UuHzgLRFyKkURuh4RmRpVNZARPSiACZBzsVqCZBAnylTTHaZBZBtvSf52iFwmjXYZCpZA2ivMhAydwd8JFRUGffg0hZApyS1TIMGS6WfhJrh9NeJUZAFQkZBR2pM1z3dEv9Dkp6x7OD6fIIZAwZDZD"
+    FB_PAGE_TOKEN = os.environ.get('FB_PAGE_TOKEN')
     # A user secret to verify webhook get request.
-    FB_VERIFY_TOKEN = "test_token"
+    FB_VERIFY_TOKEN = os.environ.get('FB_VERIFY_TOKEN')
 
     # Setup Bottle Server
     debug(True)
@@ -85,11 +81,6 @@ if not terminal_mode:
 def index():
     """Renders the home page."""
     return "Hello World"
-
-@app.route('/test')
-def index():
-    """Renders the home page."""
-    return test
 
 def wsgi_app():
     """Returns the application to make available through wfastcgi. This is used
