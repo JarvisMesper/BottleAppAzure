@@ -15,7 +15,7 @@ from actions import openfood
 import requests
 from wit import Wit
 
-terminal_mode = True
+terminal_mode = False
 
 app = Bottle()
 
