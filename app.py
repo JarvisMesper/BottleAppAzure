@@ -10,7 +10,7 @@ import sys
 from bottle import Bottle, request, debug, route
 
 from actions import forecast
-#from actions import openfood
+from actions import openfood
 
 import requests
 from wit import Wit
