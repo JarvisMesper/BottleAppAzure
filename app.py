@@ -10,7 +10,7 @@ import sys
 from bottle import Bottle, request, debug, route
 
 from actions import forecast
-from actions import openfood
+#from actions import openfood
 
 import requests
 from wit import Wit
@@ -124,7 +124,7 @@ def send(request, response):
 actions = {
     'send': send,
     'getForecast': forecast.get_forecast,
-    'getOpenFoodInfo': openfood.getOpenFoodInfo,
+    #'getOpenFoodInfo': openfood.getOpenFoodInfo,
 }
 
 client = Wit(access_token=WIT_TOKEN, actions=actions)
