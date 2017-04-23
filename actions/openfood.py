@@ -1,5 +1,5 @@
 from actions import wit
-#from openfood.RequestOpenFood import RequestOpenFood
+from openfood.RequestOpenFood import RequestOpenFood
 #from openfood.RequestOpenFood import ProductBuilder
 
 def getOpenFoodInfo(request):
