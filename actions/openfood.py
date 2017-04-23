@@ -1,5 +1,5 @@
-from actions import wit
-from actions import requestopenfood
+#from actions import wit
+import requestopenfood
 
 def getOpenFoodInfo(request):
     print('--- get_openfood() called ---')
