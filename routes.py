@@ -2,7 +2,7 @@
 Routes and views for the bottle application.
 """
 
-from bottle import route, view
+from bottle import Bottle, route, view, request
 from datetime import datetime
 
 @route('/')
@@ -34,13 +34,14 @@ def about():
         year=datetime.now().year
     )
 
-@route('/webhook')
+app = Bottle()
+
+# Facebook Messenger GET Webhook
+@app.get('/webhook')
 def messenger_webhook():
     """
     A webhook to return a challenge
     """
-    return "challenge"
-    
     verify_token = request.query.get('hub.verify_token')
     # check whether the verify tokens match
     if verify_token == FB_VERIFY_TOKEN:
@@ -49,3 +50,32 @@ def messenger_webhook():
         return challenge
     else:
         return 'Invalid Request or Verification Token'
+
+
+# Facebook Messenger POST Webhook
+@app.post('/webhook')
+def messenger_post():
+    """
+    Handler for webhook (currently for postback and messages)
+    """
+    data = request.json
+    if data['object'] == 'page':
+        for entry in data['entry']:
+            # get all the messages
+            messages = entry['messaging']
+            if messages[0]:
+                # Get the first message
+                message = messages[0]
+                # Yay! We got a new message!
+                # We retrieve the Facebook user ID of the sender
+                fb_id = message['sender']['id']
+                # We retrieve the message content
+                text = message['message']['text']
+                # Let's forward the message to the Wit.ai Bot Engine
+                # We handle the response in the function send()
+                client.run_actions(session_id=fb_id, message=text)
+    else:
+        # Returned another event
+        return 'Received Different Event'
+    return None
+
