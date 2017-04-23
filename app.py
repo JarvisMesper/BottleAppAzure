@@ -7,8 +7,7 @@ import os
 import sys
 
 # routes contains the HTTP handlers for our server and must be imported.
-import routes
-from bottle import Bottle, request, debug
+from bottle import Bottle, request, debug, route
 
 from actions import forecast
 #from actions import openfood
@@ -39,6 +38,8 @@ if not terminal_mode:
         A webhook to return a challenge
         """
         verify_token = request.query.get('hub.verify_token')
+        print(verify_token)
+        
         # check whether the verify tokens match
         if verify_token == FB_VERIFY_TOKEN:
             # respond with the challenge to confirm
@@ -80,6 +81,11 @@ if '--debug' in sys.argv[1:] or 'SERVER_DEBUG' in os.environ:
     # Debug mode will enable more verbose output in the console window.
     # It must be set at the beginning of the script.
     bottle.debug(True)
+
+@route('/')
+def index():
+    """Renders the home page."""
+    return "Hello World"
 
 def wsgi_app():
     """Returns the application to make available through wfastcgi. This is used
