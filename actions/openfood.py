@@ -1,5 +1,6 @@
-#from actions import wit
-import requestopenfood
+from actions import wit
+from actions.requestopenfood import RequestOpenFood
+#from openfood.RequestOpenFood import ProductBuilder
 
 def getOpenFoodInfo(request):
     print('--- get_openfood() called ---')
