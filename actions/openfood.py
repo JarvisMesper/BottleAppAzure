@@ -13,7 +13,7 @@ def getOpenFoodInfo(request):
         try:
             res = RequestOpenFood.get_product(barcode=product)
             res = ProductBuilder.clean_data(res)
-            context['info'] = "sfdlkajfljéewekj"[0:10]
+            context['info'] = str(res)[:10]
             if context.get('missing_id') is not None:
                 del context['missing_id']
         except:
